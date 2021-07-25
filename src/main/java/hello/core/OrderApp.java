@@ -4,15 +4,20 @@ import hello.core.member.Grade;
 import hello.core.member.Member;
 import hello.core.member.MemberService;
 import hello.core.member.MemberServiceImpl;
-import hello.core.order.OderServiceImpl;
+import hello.core.order.OrderServiceImpl;
 import hello.core.order.Order;
 import hello.core.order.OrderService;
 
 public class OrderApp {
 
     public static void main(String[] args) {
-        MemberService memberService = new MemberServiceImpl();
-        OrderService orderService = new OderServiceImpl();
+
+        AppConfig appConfig = new AppConfig();
+
+        MemberService memberService = appConfig.memberService();
+        OrderService orderService = appConfig.orderService();
+        //MemberService memberService = new MemberServiceImpl(null);
+        //OrderService orderService = new OrderServiceImpl(null, null);
 
         Long memberId = 1L;
         Member member = new Member(memberId, "memberA", Grade.VIP);
