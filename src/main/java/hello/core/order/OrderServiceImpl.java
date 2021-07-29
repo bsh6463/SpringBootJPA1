@@ -12,9 +12,11 @@ import org.springframework.stereotype.Component;
 @Component
 public class OrderServiceImpl implements OrderService{
 
-    private final MemberRepository memberRepository;
+    private  final MemberRepository memberRepository;
+
+
     //private final DiscountPolicy discountPolicy = new RateDiscountPolicy();
-    private final DiscountPolicy discountPolicy; //이렇게하면 인터페이스에만 의존함.
+    private  final DiscountPolicy discountPolicy; //이렇게하면 인터페이스에만 의존함.
 
     @Autowired
     public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
