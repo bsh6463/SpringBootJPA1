@@ -13,7 +13,7 @@ public class Delivery {
     @Column(name = "delivery_id")
     private Long id;
 
-    @OneToOne(mappedBy = "delivery") //Order table의 어느 컬럼에서 읽어옴???
+    @OneToOne(mappedBy = "delivery", fetch = FetchType.LAZY) //Order table의 어느 컬럼에서 읽어옴???
     private Order order;
 
     @Embedded

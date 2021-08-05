@@ -17,14 +17,14 @@ public class Order {
     @Column(name = "order_id")
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private Member member;
 
-    @OneToMany(mappedBy = "order") //order_item의 어느 컬럼으로부터 orderItem 읽어옴?
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL) //order_item의 어느 컬럼으로부터 orderItem 읽어옴?
     private List<OrderItem> orderItems = new ArrayList<>();
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "delivery_id")
     private Delivery delivery;
 
@@ -33,5 +33,24 @@ public class Order {
     @Enumerated(EnumType.STRING)
     private OrderStatus status; //주문상태, enum
 
+
+    //양방향 연관관꼐 편의 메서드//
+    //양방향 연관관계는 객체를 양방향으로 넣어줗어야함.
+    //요렇게하면 실수도 줄이고 간단해짐.ㅋㅋ
+    //어디에 있으면 좋아? 컨트롤 하는 쪽
+    public void setMember(Member member){
+        this.member = member;
+        member.getOrders().add(this);
+    }
+
+    public void addOrderItem(OrderItem orderItem){
+        orderItems.add(orderItem);
+        orderItem.setOrder(this);
+    }
+
+    public void setDelivery(Delivery delivery){
+        this.delivery = delivery;
+        delivery.setOrder(this);
+    }
 
 }
