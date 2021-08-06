@@ -1,5 +1,6 @@
 package jpabook.jpashop.service;
 
+import jpabook.jpashop.domain.item.Book;
 import jpabook.jpashop.domain.item.Item;
 import jpabook.jpashop.domain.repository.ItemRepository;
 import lombok.RequiredArgsConstructor;
@@ -27,6 +28,17 @@ public class ItemService {
     @Transactional
     public void saveItem(Item item){
         itemRepository.save(item);
+    }
+
+    /**
+     * 엔티티 업데이트
+     */
+    @Transactional
+    public void updateItem(Long itemId, String name, int price, int stockQuantity){
+        Item findItem = itemRepository.findOne(itemId); //영속상태 엔티티 찾아와서
+        findItem.setName(name);   //영속상태 엔티티를 변경함.
+        findItem.setStockQuantity(stockQuantity);        //영속상태이므로 dirtycheking 대상임.
+
     }
 
     public List<Item> findItems(){
