@@ -75,6 +75,12 @@ public class Order {
         return order;
     }
 
+    /**
+     * 기본 생성자 사용 안함.
+     */
+    protected Order() {
+    }
+
     //==비즈니스 로직==//
     /**
      * 주문 취소

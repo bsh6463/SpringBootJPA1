@@ -39,6 +39,12 @@ public class OrderItem {
         return orderItem;
     }
 
+    /**
+     * 기본 생성자 사용 안함.
+     */
+    protected OrderItem() {
+
+    }
 
     //==비즈니스 로직==//
 
