@@ -1,4 +1,4 @@
-package example.springjpa2.domain.item;
+package springjpa2.domain.item;
 
 import lombok.Getter;
 import lombok.Setter;

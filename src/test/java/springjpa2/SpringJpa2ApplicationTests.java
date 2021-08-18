@@ -1,4 +1,4 @@
-package example.springjpa2;
+package springjpa2;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
