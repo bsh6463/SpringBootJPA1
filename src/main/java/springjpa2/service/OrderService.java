@@ -11,6 +11,7 @@ import springjpa2.domain.item.Item;
 import springjpa2.repository.ItemRepository;
 import springjpa2.repository.MemberRepository;
 import springjpa2.repository.OrderRepository;
+import springjpa2.repository.OrderSearch;
 
 import java.util.List;
 
@@ -60,7 +61,7 @@ public class OrderService {
     /**
      * 검색
      */
-//    public List<Order> findOrders(OrderSearch orderSearch){
-//        return orderRepository.findAll(orderSearch);
-//    }
+    public List<Order> findOrders(OrderSearch orderSearch){
+        return orderRepository.findAllByString(orderSearch);
+    }
 }
