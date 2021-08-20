@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import springjpa2.API.MemberApiController;
 import springjpa2.domain.Member;
 import springjpa2.repository.MemberRepository;
 
@@ -43,4 +44,9 @@ public class MemberService {
     }
 
 
+    @Transactional
+    public void update(Long id, String name) {
+        Member member = memberRepository.findOne(id);
+        member.setName(name);
+    }
 }
