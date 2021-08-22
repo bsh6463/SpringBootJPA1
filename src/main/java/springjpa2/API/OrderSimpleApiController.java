@@ -65,4 +65,21 @@ public class OrderSimpleApiController {
             this.address = order.getDelivery().getAddress();
         }
     }
+
+
+    @GetMapping("/api/v3/simple-orders")
+    public List<SimPleOrderDto> ordersV3(){
+
+      List<Order> orders = orderRepository.findAllWithMemberDelivery();
+
+      List<SimPleOrderDto> result = orders.stream()
+              .map(o -> new SimPleOrderDto(o))
+              .collect(Collectors.toList());
+
+      return result;
+    }
+
+
+
+
 }
