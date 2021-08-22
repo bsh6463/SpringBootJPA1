@@ -9,6 +9,8 @@ import springjpa2.domain.Order;
 import springjpa2.domain.OrderStatus;
 import springjpa2.repository.OrderRepository;
 import springjpa2.repository.OrderSearch;
+import springjpa2.repository.order.simplequery.OrderSimpleQueryDto;
+import springjpa2.repository.order.simplequery.OrderSimpleQueryRepository;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -24,6 +26,7 @@ import java.util.stream.Collectors;
 public class OrderSimpleApiController {
 
     private final OrderRepository orderRepository;
+    private final OrderSimpleQueryRepository orderSimpleQueryRepository;
 
     @GetMapping("/api/v1/simple-orders")
     public List<Order>ordersV1(){
@@ -48,23 +51,6 @@ public class OrderSimpleApiController {
         return result;
     }
 
-    @Data
-    private class SimPleOrderDto {
-
-        private Long orderId;
-        private String name;
-        private LocalDateTime orderDate;
-        private OrderStatus orderStatus;
-        private Address address;
-
-        public SimPleOrderDto(Order order){
-            this.orderId = order.getId();
-            this.name = order.getMember().getName();
-            this.orderDate = order.getOrderDate();
-            this.orderStatus = order.getStatus();
-            this.address = order.getDelivery().getAddress();
-        }
-    }
 
 
     @GetMapping("/api/v3/simple-orders")
@@ -79,7 +65,30 @@ public class OrderSimpleApiController {
       return result;
     }
 
+    @GetMapping("/api/v4/simple-orders")
+    public List<OrderSimpleQueryDto> ordersV4(){
+
+        return orderSimpleQueryRepository.findOrderDtos();
+    }
 
 
+    @Data
+    private class SimPleOrderDto {
+
+        private Long orderId;
+        private String name;
+        private LocalDateTime orderDate;
+        private OrderStatus orderStatus;
+        private Address address;
+
+
+        public SimPleOrderDto(Order order) {
+            this.orderId = order.getId();
+            this.name = order.getMember().getName();
+            this.orderDate = order.getOrderDate();
+            this.orderStatus = order.getStatus();
+            this.address = order.getDelivery().getAddress();
+        }
+    }
 
 }
