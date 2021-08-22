@@ -1,5 +1,6 @@
 package springjpa2.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import springjpa2.domain.item.Item;
@@ -23,6 +24,7 @@ public class OrderItem {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ORDER_ID")
+    @JsonIgnore
     private Order order;
 
     private int orderPrice;
