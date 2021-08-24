@@ -13,6 +13,8 @@ import springjpa2.domain.OrderItem;
 import springjpa2.domain.OrderStatus;
 import springjpa2.repository.OrderRepository;
 import springjpa2.repository.OrderSearch;
+import springjpa2.repository.order.query.OrderQueryDto;
+import springjpa2.repository.order.query.OrderQueryRepository;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -23,7 +25,8 @@ import java.util.stream.Collectors;
 public class OrderApiController {
     
     private final OrderRepository orderRepository;
-    
+    private final OrderQueryRepository orderQueryRepository;
+
     @GetMapping("/api/v1/orders")
     public List<Order> ordersV1(){
         List<Order> all = orderRepository.findAllByString(new OrderSearch());
@@ -58,6 +61,11 @@ public class OrderApiController {
         List<Order> orders = orderRepository.findAllWitMemberDelivery(offset, limit);
         List<OrderDto> result = orders.stream().map(o -> new OrderDto(o)).collect(Collectors.toList());
         return new Result(result);
+    }
+
+    @GetMapping("/api/v4/orders")
+    public List<OrderQueryDto> ordersV4(){
+        return orderQueryRepository.findOrderQueryDtos();
     }
 
 
