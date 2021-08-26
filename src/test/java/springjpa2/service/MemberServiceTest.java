@@ -9,10 +9,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 import springjpa2.domain.Member;
 import springjpa2.repository.MemberRepository;
-
-
-import static org.junit.Assert.*;
-import static org.junit.jupiter.api.Assertions.*;
+import springjpa2.repository.MemberRepositoryOld;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -32,7 +29,7 @@ public class MemberServiceTest {
         Long savedId = memberService.join(member);
 
         //then
-        Assertions.assertThat(member).isEqualTo(memberRepository.findOne(savedId));
+        Assertions.assertThat(member).isEqualTo(memberRepository.findById(savedId));
     }
 
 

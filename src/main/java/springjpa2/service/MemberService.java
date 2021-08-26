@@ -1,12 +1,11 @@
 package springjpa2.service;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import springjpa2.API.MemberApiController;
 import springjpa2.domain.Member;
 import springjpa2.repository.MemberRepository;
+import springjpa2.repository.MemberRepositoryOld;
 
 import java.util.List;
 
@@ -40,13 +39,13 @@ public class MemberService {
     }
 
     public Member findOne(Long memberId){
-        return memberRepository.findOne(memberId);
+        return memberRepository.findById(memberId).get();
     }
 
 
     @Transactional
     public void update(Long id, String name) {
-        Member member = memberRepository.findOne(id);
+        Member member = memberRepository.findById(id).get();
         member.setName(name);
     }
 }

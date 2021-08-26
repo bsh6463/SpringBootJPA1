@@ -8,10 +8,7 @@ import springjpa2.domain.Member;
 import springjpa2.domain.Order;
 import springjpa2.domain.OrderItem;
 import springjpa2.domain.item.Item;
-import springjpa2.repository.ItemRepository;
-import springjpa2.repository.MemberRepository;
-import springjpa2.repository.OrderRepository;
-import springjpa2.repository.OrderSearch;
+import springjpa2.repository.*;
 
 import java.util.List;
 
@@ -30,7 +27,7 @@ public class OrderService {
     @Transactional
     public Long order(Long memberId, Long itemId, int count){
         //엔티티 조회
-        Member member = memberRepository.findOne(memberId);
+        Member member = memberRepository.findById(memberId).get();
         Item item = itemRepository.findOne(itemId);
 
         //배송정보 생성
